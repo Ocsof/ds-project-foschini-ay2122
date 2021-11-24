@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{2CF752FE-57EF-4BA2-905A-EFC575ADA080}|Default">
+  <MonoDevelop.Ide.ItemProperties.RethinkDbClientDemo FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.RethinkDbLib FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="RethinkDbApp/src/pluto.cs">
+    <Files>
+      <File FileName="RethinkDbApp/Program.cs" Line="1" Column="1" />
+      <File FileName="RethinkDbClientDemo/Program.cs" Line="1" Column="1" />
+      <File FileName="RethinkDbTest/Program.cs" Line="1" Column="1" />
+      <File FileName="RethinkDbApp/src/pluto.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="RethinkDbApp" expanded="True">
+            <Node name="RethinkDbLib" expanded="True">
+              <Node name="src" expanded="True">
+                <Node name="pluto.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="RethinkDbTest" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.RethinkDbTest FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
