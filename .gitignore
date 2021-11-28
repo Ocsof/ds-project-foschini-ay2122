@@ -1,6 +1,12 @@
 # visual studio
 RethinkDbApp/.vs/RethinkDbApp/v16/.suo
 RethinkDbApp/.vs/RethinkDbApp/xs/UserPrefs.xml
+.vs/RethinkDbApp/xs/project-cache/RethinkDbClientDemo-Debug.json
+.vs/RethinkDbApp/xs/project-cache/RethinkDbLib-Debug.json
+.vs/RethinkDbApp/xs/project-cache/RethinkDbTest-Debug.json
+RethinkDbLib/.vs/
+RethinkDbClientDemo/.vs/
+RethinkDbTest/.vs/
 
 RethinkDbApp/RethinkDbLib/bin
 RethinkDbApp/RethinkDbLib/obj
