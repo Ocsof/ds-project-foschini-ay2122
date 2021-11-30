@@ -1,4 +1,4 @@
-﻿using RethinkDbLib.src.DbManager;
+﻿using RethinkDbLib.src.DBManager;
 using RethinkDbLib.src.TablesManager.Notifications;
 
 namespace RethinkDbLib.src

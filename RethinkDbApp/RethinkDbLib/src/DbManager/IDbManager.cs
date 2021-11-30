@@ -1,6 +1,6 @@
 ﻿
 
-namespace RethinkDbLib.src.DbManager
+namespace RethinkDbLib.src.DBManager
 {
     /// <summary>
     /// Gestione db ---> tabelle, indici, riconfigurazione shards e replication

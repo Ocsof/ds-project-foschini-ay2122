@@ -1,5 +1,5 @@
 ﻿using RethinkDbLib.src.Connection;
-using RethinkDbLib.src.DbManager;
+using RethinkDbLib.src.DBManager;
 using RethinkDbLib.src.TablesManager.Notifications;
 using RethinkDb.Driver;
 using System;

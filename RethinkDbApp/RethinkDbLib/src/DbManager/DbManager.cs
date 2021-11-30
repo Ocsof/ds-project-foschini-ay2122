@@ -3,7 +3,7 @@ using RethinkDb.Driver;
 using RethinkDbLib.src.Exception;
 using System.Linq;
 
-namespace RethinkDbLib.src.DbManager
+namespace RethinkDbLib.src.DBManager
 {
     class DbManager : IDbManager
     {
