@@ -3,7 +3,6 @@ RethinkDbApp/.vs/RethinkDbApp/v16/.suo
 RethinkDbApp/.vs/RethinkDbApp/xs/UserPrefs.xml
 RethinkDbApp/.vs/RethinkDbApp/xs/project-cache/RethinkDbLib-Debug.json
 RethinkDbApp/.vs/RethinkDbApp/xs/project-cache/RethinkDbClientDemo-Debug.json
-RethinkDbApp/.vs/RethinkDbApp/xs/project-cache/RethinkDbLib-Debug.json
 RethinkDbApp/.vs/RethinkDbApp/xs/project-cache/RethinkDbTest-Debug.json
 RethinkDbLib/.vs/
 RethinkDbClientDemo/.vs/
@@ -28,5 +27,5 @@ Thumbs.db
 *.app
 *.exe
 
-
+RethinkDbApp/.vs/RethinkDbApp/xs/project-cache/RethinkDbLib-Debug.json
 
