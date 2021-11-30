@@ -9,9 +9,15 @@
     <None Remove="src\" />
     <None Remove="RethinkDb.Driver" />
     <None Remove="System.Reactive" />
+    <None Remove="src\DbManager\" />
+    <None Remove="src\TablesManager\" />
+    <None Remove="src\TablesManager\Notifications\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\" />
+    <Folder Include="src\DbManager\" />
+    <Folder Include="src\TablesManager\" />
+    <Folder Include="src\TablesManager\Notifications\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="RethinkDb.Driver" Version="2.3.150" />
