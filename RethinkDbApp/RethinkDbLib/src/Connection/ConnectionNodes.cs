@@ -1,25 +1,26 @@
-﻿using Rethink.Model;
-using RethinkDb.Driver;
+﻿using RethinkDb.Driver;
 using RethinkDb.Driver.Net;
 using RethinkDb.Driver.Net.Clustering;
-using RethinkDbApp.Exception;
+using RethinkDbLib.src.Exception;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Rethink.Connection
+namespace RethinkDbLib.src.Connection
 {
     class ConnectionNodes : IConnectionNodes
     {
         //private RethinkDB R = RethinkDB.R;
         private ConnectionPool conn;  //IConnection
         private readonly IList<DbOptions> listNodi;
+        private readonly int timeout;
 
-
-        public ConnectionNodes(IList<DbOptions> listNodi)
+        //il timeout come paramtro opzionalmente configurabile
+        public ConnectionNodes(IList<DbOptions> listNodi, int timeout = 20) 
         {
             this.listNodi = listNodi;
+            this.timeout = timeout;
         }
 
         public virtual IConnection GetConnection()
@@ -40,7 +41,7 @@ namespace Rethink.Connection
                         .Seed(nodi)
                         .PoolingStrategy(new RoundRobinHostPool())
                         .Discover(true)
-                        .InitialTimeout(listNodi.First().Timeout)
+                        .InitialTimeout(this.timeout)
                         .Connect();
                 }
                 catch (ReqlDriverError)  //viene catturata se dopo 20 secondi non è riuscito a connettersi
@@ -75,6 +76,9 @@ namespace Rethink.Connection
             return this.listNodi;
         }
 
-
+        public int GetTimeout()
+        {
+            return this.timeout;
+        }
     }
 }

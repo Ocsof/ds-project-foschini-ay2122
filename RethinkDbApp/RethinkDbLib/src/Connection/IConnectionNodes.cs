@@ -1,8 +1,8 @@
-﻿using Rethink.Model;
+﻿
 using RethinkDb.Driver.Net;
 using System.Collections.Generic;
 
-namespace Rethink.Connection
+namespace RethinkDbLib.src.Connection
 {
     interface IConnectionNodes
     {
@@ -22,6 +22,11 @@ namespace Rethink.Connection
         /// </summary>
         /// <returns>I nodi Rethink presenti sul server</returns>
         public IList<DbOptions> GetNodi();
-     
+
+        /// <summary>
+        /// Timeout per la connessione
+        /// </summary>
+        public int GetTimeout();
+
     }
 }

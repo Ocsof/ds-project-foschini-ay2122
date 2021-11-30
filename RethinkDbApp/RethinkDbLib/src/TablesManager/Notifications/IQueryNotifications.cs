@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Rethink.Model
+namespace RethinkDbLib.src.TablesManager.Notifications
 {
     /// <summary>
     /// Gestione tabella Notifications ----> select, update, delete

@@ -1,7 +1,7 @@
-﻿using Rethink.Model;
-using RethinkDbApp.Model;
+﻿using RethinkDbLib.src.DbManager;
+using RethinkDbLib.src.TablesManager.Notifications;
 
-namespace Rethink
+namespace RethinkDbLib.src
 {
     /// <summary>
     /// Libreria per la gestione del Db Rethink, della tabella "Notifiche" e per rimanere in ascolto sui cambiamenti della tabella "Notifications"

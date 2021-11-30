@@ -1,9 +1,9 @@
-﻿using Rethink.Connection;
+﻿using RethinkDbLib.src.Connection;
 using RethinkDb.Driver;
-using RethinkDbApp.Exception;
+using RethinkDbLib.src.Exception;
 using System.Linq;
 
-namespace Rethink.Model
+namespace RethinkDbLib.src.DbManager
 {
     class DbManager : IDbManager
     {

@@ -1,11 +1,12 @@
-﻿using Rethink.Connection;
-using Rethink.Model;
+﻿using RethinkDbLib.src.Connection;
+using RethinkDbLib.src.DbManager;
+using RethinkDbLib.src.TablesManager.Notifications;
 using RethinkDb.Driver;
 using System;
 using System.Collections.Generic;
-using RethinkDbApp.Model;
 
-namespace Rethink
+
+namespace RethinkDbLib.src
 {
     /// <summary>
     /// Libreria per la gestione del Db, della tabella "Notifiche" e per rimanere in ascolto sui cambiamenti della tabella "Notifications"
@@ -29,7 +30,7 @@ namespace Rethink
             this.listNodi = new List<DbOptions>();
             foreach (String hostPort in hostsPorts)
             {
-                listNodi.Add(new DbOptions { Database = dbName, HostPort = hostPort, Timeout = 20 });
+                listNodi.Add(new DbOptions { Database = dbName, HostPort = hostPort });
             }
             this.connection = new ConnectionNodes(listNodi);
             

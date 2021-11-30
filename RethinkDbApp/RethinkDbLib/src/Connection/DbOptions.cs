@@ -1,6 +1,6 @@
 ﻿
 
-namespace Rethink.src.Model
+namespace RethinkDbLib.src.Connection
 {
     class DbOptions
     {
@@ -13,10 +13,5 @@ namespace Rethink.src.Model
         /// Nome database
         /// </summary>
         public string Database { get; set; }
-
-        /// <summary>
-        /// Timeout per la connessione
-        /// </summary>
-        public int Timeout { get; set; }
     }
 }

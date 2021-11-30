@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RethinkDbApp.Exception
+namespace RethinkDbLib.src.Exception
 {
     /// <summary>
     /// Se la Tabella non esiste o non è stata trovata sul db Rethink

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Rethink.Model
+namespace RethinkDbLib.src.TablesManager.Notifications
 {
     public abstract class Notification
     {

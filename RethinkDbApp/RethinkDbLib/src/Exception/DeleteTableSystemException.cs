@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RethinkDbApp.Exception
+namespace RethinkDbLib.src.Exception
 {
     /// <summary>
     /// Se si tenta di eliminare una tabella di sistema

@@ -1,6 +1,6 @@
 ﻿
 
-namespace RethinkDbApp.Model
+namespace RethinkDbLib.src.TablesManager.Notifications
 {
     /// <summary>
     /// Manager di una tabella di sistema
