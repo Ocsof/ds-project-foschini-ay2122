@@ -9,26 +9,34 @@ namespace RethinkDbTest.src
     [TestClass]
     public class DbManagerTest
     {
-        private IList<string> hostPortsOneNode = new List<String>() { "192.168.1.57:28016" };
-        private IList<string> hostPortsOneNodeWrong = new List<String>() { "192.168.1.57:29016" };
-        
+        private IList<string> hostPortsOneNode; 
+        private IList<string> hostPortsOneNodeWrong; 
+        private IUtilityRethink utilityRethink;
+        private IUtilityRethink utilityRethinkWrong;
+
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            hostPortsOneNode  = new List<String>() { "192.168.1.57:28016" };
+            hostPortsOneNodeWrong = new List<String>() { "192.168.1.57:29016" };
+
+            utilityRethink = new UtilityRethink("test", hostPortsOneNode);
+            utilityRethinkWrong = new UtilityRethink("test", hostPortsOneNodeWrong);
+        }
+
 
         [TestMethod]
         public void TestConnectionFailureAfterTimeOut()
         {
-            //IUtilityRethink utilityRethink = new UtilityRethink("test", hostPortsOneNode);
-            //IUtilityRethink utilityRethinkWrong = new UtilityRethink("test", hostPortsOneNodeWrong);
-
-           //var dbManager = utilityRethink.GetDbManager();
-            //new UtilityRethink("test", hostPortsOneNodeWrong);
-
-
             Assert.ThrowsException<ConnectionFailureException>( () => new UtilityRethink("test", hostPortsOneNodeWrong) );
         }
 
+        [TestMethod]
         public void TestDeleteTableList()
         {
-
+            var dbManager = utilityRethink.GetDbManager();
+            Assert.ThrowsException<DeleteTableSystemException>(() => dbManager.DeleteTable("Notifications") );
         }
     }
 }

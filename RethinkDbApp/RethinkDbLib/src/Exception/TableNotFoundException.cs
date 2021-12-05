@@ -6,7 +6,7 @@ namespace RethinkDbLib.src.Exception
     /// Se la Tabella non esiste o non è stata trovata sul db Rethink
     /// </summary>
     [Serializable]
-    class TableNotFoundException : System.Exception
+    public class TableNotFoundException : System.Exception
     {
         private readonly static string message = "Tabella ";
         private readonly static string message2 = " non trovata sul db";
