@@ -22,9 +22,14 @@ namespace RethinkDbTest.src
             hostPortsOneNodeWrong = new List<String>() { "192.168.1.57:29016" };
 
             utilityRethink = new UtilityRethink("test", hostPortsOneNode);
-            utilityRethinkWrong = new UtilityRethink("test", hostPortsOneNodeWrong);
+            //utilityRethinkWrong = new UtilityRethink("test", hostPortsOneNodeWrong);
         }
 
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            this.utilityRethink.CloseConnection();
+        }
 
         [TestMethod]
         public void TestConnectionFailureAfterTimeOut()
