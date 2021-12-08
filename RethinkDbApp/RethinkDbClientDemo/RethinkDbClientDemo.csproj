@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RethinkDbApp\RethinkDbLib.csproj" />
+    <None Remove="src\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RethinkDbLib\RethinkDbLib.csproj" />
   </ItemGroup>
 </Project>
