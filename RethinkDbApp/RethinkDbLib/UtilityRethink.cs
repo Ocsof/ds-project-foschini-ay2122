@@ -11,7 +11,7 @@ namespace RethinkDbLib.src
     /// <summary>
     /// Libreria per la gestione del Db, della tabella "Notifiche" e per rimanere in ascolto sui cambiamenti della tabella "Notifications"
     /// </summary>
-    public class UtilityRethink : IUtilityRethink
+    public class UtilityRethink : INotificationProviderDBMS
     {
         private readonly static RethinkDB R = RethinkDB.R;
         private readonly IConnectionNodes connection;

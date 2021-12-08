@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RethinkDbLib;
 using RethinkDbLib.src;
 using RethinkDbLib.src.Exception;
 using System;
@@ -11,8 +12,8 @@ namespace RethinkDbTest.src
     {
         private IList<string> hostPortsOneNode; 
         private IList<string> hostPortsOneNodeWrong; 
-        private IUtilityRethink utilityRethink;
-        private IUtilityRethink utilityRethinkWrong;
+        private INotificationProviderDBMS utilityRethink;
+        private INotificationProviderDBMS utilityRethinkWrong;
 
 
         [TestInitialize]

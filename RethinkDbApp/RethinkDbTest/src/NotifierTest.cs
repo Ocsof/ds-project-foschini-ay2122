@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RethinkDb.Driver.Model;
+using RethinkDbLib;
 using RethinkDbLib.src;
 using RethinkDbLib.src.Exception;
 using RethinkDbLib.src.TablesManager.Notifications;
@@ -17,7 +18,7 @@ namespace RethinkDbTest.src
     {
         private IList<string> hostPortsOneNode;
         private IList<string> hostPortsOneNodeWrong;
-        private IUtilityRethink utilityRethink;
+        private INotificationProviderDBMS utilityRethink;
 
         private INotifier<NotificationExec> notifierExec;
         private INotifier<NotificationNewData> notifierNewData;

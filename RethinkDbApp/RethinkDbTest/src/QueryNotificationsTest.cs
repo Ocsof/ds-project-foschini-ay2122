@@ -4,6 +4,7 @@ using RethinkDbLib.src;
 using RethinkDbLib.src.Exception;
 using System.Collections.Generic;
 using RethinkDbLib.src.TablesManager.Notifications;
+using RethinkDbLib;
 
 namespace RethinkDbTest.src
 {
@@ -12,8 +13,8 @@ namespace RethinkDbTest.src
     {
         private IList<string> hostPortsOneNode;
         private IList<string> hostPortsOneNodeWrong;
-        private IUtilityRethink utilityRethink;
-        private IUtilityRethink utilityRethinkWrong;
+        private INotificationProviderDBMS utilityRethink;
+        private INotificationProviderDBMS utilityRethinkWrong;
         private IQueryNotifications queryNotifications;
 
         private NotificationNewData notificationNewData;
