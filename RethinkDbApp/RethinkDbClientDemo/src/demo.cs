@@ -22,7 +22,7 @@ namespace RethinkDbClientDemo.src
             IList<string> hostPortsNodiCluster = new List<String>() { "192.168.1.57:28016", "192.168.1.57:28017", "192.168.1.57:28018", "192.168.1.57:28019", "192.168.1.57:28020" };
             IList<string> hostPortsTwoNodi = new List<String>() { "192.168.1.57:28016", "192.168.1.57:28017" };
             IList<string> hostPortsOneNode = new List<String>() { "192.168.1.57:28016" };
-            INotificationProviderDBMS utilityRethink = new UtilityRethink("test", hostPortsOneNode);
+            INotificationProviderDBMS utilityRethink = new UtilityRethink("test", hostPortsNodiCluster);
 
             var dbManager = utilityRethink.GetDbManager();
             var queryNotifications = utilityRethink.GetNotificationsManager().GetQueryService();
