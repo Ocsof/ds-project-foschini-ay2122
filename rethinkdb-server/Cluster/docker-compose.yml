@@ -1,0 +1,69 @@
+
+
+version: "3"
+
+services:
+  rethinkdb1:
+    platform: linux/amd64
+    build: ./rethinkdb
+    environment:
+      - "DBCLUSTERHOSTS=rethinkdb2;rethinkdb3;rethinkdb4;rethinkdb5"
+      - "RETHINKARGS=--server-tag primary --server-name rethinkdb1 --bind all"
+    hostname: rethinkdb1
+    networks:
+      - rethink-net
+    ports:
+      - "8081:8080"
+      - "28016:28015"
+  rethinkdb2:
+    platform: linux/amd64
+    build: ./rethinkdb
+    environment:
+      - "DBCLUSTERHOSTS=rethinkdb1;rethinkdb3;rethinkdb4;rethinkdb5"
+      - "RETHINKARGS=--server-tag primary --server-name rethinkdb2 --bind all"
+    hostname: rethinkdb2
+    networks:
+      - rethink-net
+    ports:
+      - "8082:8080"
+      - "28017:28015"
+  rethinkdb3:
+    platform: linux/amd64
+    build: ./rethinkdb
+    environment:
+      - "DBCLUSTERHOSTS=rethinkdb1;rethinkdb2;rethinkdb4;rethinkdb5"
+      - "RETHINKARGS=--server-tag primary --server-name rethinkdb3 --bind all"
+    hostname: rethinkdb3
+    networks:
+      - rethink-net
+    ports:
+      - "8083:8080"
+      - "28018:28015"
+  rethinkdb4:
+    platform: linux/amd64
+    build: ./rethinkdb
+    environment:
+      - "DBCLUSTERHOSTS=rethinkdb1;rethinkdb2;rethinkdb3;rethinkdb5"
+      - "RETHINKARGS=--server-tag primary --server-name rethinkdb4 --bind all"
+    hostname: rethinkdb4
+    networks:
+      - rethink-net
+    ports:
+      - "8084:8080"
+      - "28019:28015"
+  rethinkdb5:
+    platform: linux/amd64
+    build: ./rethinkdb
+    environment:
+      - "DBCLUSTERHOSTS=rethinkdb1;rethinkdb2;rethinkdb3;rethinkdb4"
+      - "RETHINKARGS=--server-tag primary --server-name rethinkdb5 --bind all"
+    hostname: rethinkdb5
+    networks:
+      - rethink-net
+    ports:
+      - "8085:8080"
+      - "28020:28015"
+
+networks:
+  rethink-net:
+    driver: bridge
