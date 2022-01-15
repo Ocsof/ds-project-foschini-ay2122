@@ -26,6 +26,8 @@
   Nel caso a due nodi è possibile digitare anche "proprioIndirizzoDiRete:8082" mentre nel caso a 5 nodi si possono digitare anche: "proprioIndirizzoDiRete:8083", "proprioIndirizzoDiRete:8084" "proprioIndirizzoDiRete:8085"
 
 - A questo punto il tipo di server RethinkDB scelto è in esecuzione.
-  * Aprire il progetto di libreria e seguire le istruzioni per utilizzarlo lato client nel README.md
+  * Aprire il progetto di libreria "RethinkDbApp" e eseguire la demo "RethinkDbClientDemo" e il test "RethinkDbTest"
+
+- ATTENZIONE: sia nella demo sia nei test è necessario mettere il proprio indirizzo IP perchè il server RethinkDB esegue localmente
 
 - Per stoppare il server in esecuzione: `docker-compose -f docker-compose.yml stop` 
