@@ -26,7 +26,7 @@
   Nel caso a due nodi è possibile digitare anche "proprioIndirizzoDiRete:8082" mentre nel caso a 5 nodi si possono digitare anche: "proprioIndirizzoDiRete:8083", "proprioIndirizzoDiRete:8084" "proprioIndirizzoDiRete:8085"
 
 - A questo punto il tipo di server RethinkDB scelto è in esecuzione.
-  * Aprire il progetto di libreria "RethinkDbApp" e eseguire la demo "RethinkDbClientDemo" e il test "RethinkDbTest"
+  * Aprire il progetto di libreria "RethinkDbApp" e eseguire la demo "RethinkDbClientDemo" e i test di "RethinkDbTest"
 
 - ATTENZIONE: sia nella demo sia nei test è necessario mettere il proprio indirizzo IP perchè il server RethinkDB esegue localmente
 
