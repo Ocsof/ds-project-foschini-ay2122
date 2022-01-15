@@ -7,11 +7,17 @@
 
   <ItemGroup>
     <None Remove="src\" />
+    <None Remove="RethinkDb.Driver" />
+    <None Remove="System.Reactive" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RethinkDbLib\RethinkDbLib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="RethinkDb.Driver" Version="2.3.150" />
+    <PackageReference Include="System.Reactive" Version="5.0.0" />
   </ItemGroup>
 </Project>

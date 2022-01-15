@@ -19,7 +19,8 @@ namespace RethinkDbTest.src
         [TestInitialize]
         public void TestInitialize()
         {
-            hostPortsOneNode  = new List<String>() { "192.168.1.57:28016" };
+            //ATTENZIONE: Cambiare l'indirizzo IP con il proprio locale
+            hostPortsOneNode = new List<String>() { "192.168.1.57:28016" };
             hostPortsOneNodeWrong = new List<String>() { "192.168.1.57:29016" };
 
             utilityRethink = new UtilityRethink("test", hostPortsOneNode);

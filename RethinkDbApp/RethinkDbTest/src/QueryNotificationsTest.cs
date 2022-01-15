@@ -26,6 +26,7 @@ namespace RethinkDbTest.src
         [TestInitialize]
         public void TestInitialize()
         {
+            //ATTENZIONE: Cambiare l'indirizzo IP con il proprio locale
             this.hostPortsOneNode = new List<String>() { "192.168.1.57:28016" };
             this.hostPortsOneNodeWrong = new List<String>() { "192.168.1.57:29016" };
 

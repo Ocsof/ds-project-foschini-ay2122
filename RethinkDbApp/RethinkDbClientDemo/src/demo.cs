@@ -17,8 +17,8 @@ namespace RethinkDbClientDemo.src
 
         //static void Main(string[] args)
         static async Task Main(string[] args)
-        {    
-        
+        {
+            //ATTENZIONE: Cambiare l'indirizzo IP con il proprio locale
             IList<string> hostPortsNodiCluster = new List<String>() { "192.168.1.57:28016", "192.168.1.57:28017", "192.168.1.57:28018", "192.168.1.57:28019", "192.168.1.57:28020" };
             IList<string> hostPortsTwoNodi = new List<String>() { "192.168.1.57:28016", "192.168.1.57:28017" };
             IList<string> hostPortsOneNode = new List<String>() { "192.168.1.57:28016" };
@@ -302,6 +302,7 @@ namespace RethinkDbClientDemo.src
 
 
             NotificationSubscription<NotificationExec> pair = notificatorsExec.ListenWithOneOfTheArguments("ciao", "ciuppa");
+
             IObservable<Change<NotificationExec>> observervableExecForArgs = pair.Observable;
             observervableExecForArgs.SubscribeOn(NewThreadScheduler.Default)
                 .Subscribe(
@@ -365,8 +366,6 @@ namespace RethinkDbClientDemo.src
 
             //notificatorsNewData.StopListening();
 
-
-            Console.ReadLine();
 
             utilityRethink.CloseConnection();
 
