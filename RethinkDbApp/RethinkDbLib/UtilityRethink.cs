@@ -18,7 +18,7 @@ namespace RethinkDbLib.src
         private readonly INotificationsManager notificationsManager;
         private readonly IDbManager dbManager;
         private readonly List<string> WellKnownTables = new List<string>();
-        private readonly IList<DbOptions> listNodi;
+        private readonly IList<DbOptions> listNodes;
 
         /// <summary>
         /// Connettere l'app al cluster Rethinkdb in esecuzione
@@ -27,23 +27,25 @@ namespace RethinkDbLib.src
         /// <param name="hostsPorts">Lista di stringhe del tipo: "indirizzoip:porta"</param>
         public UtilityRethink(string dbName, IList<String> hostsPorts)
         {
-            this.listNodi = new List<DbOptions>();
+            this.listNodes = new List<DbOptions>();
             foreach (String hostPort in hostsPorts)
             {
-                listNodi.Add(new DbOptions { Database = dbName, HostPort = hostPort });
+                listNodes.Add(new DbOptions { Database = dbName, HostPort = hostPort });
             }
-            this.connection = new ConnectionNodes(listNodi);
-            
+            this.connection = new ConnectionNodes(listNodes);
+
             //vari manager supportati
             this.notificationsManager = new NotificationsManager(this.connection);
-            this.WellKnownTables.Add(notificationsManager.GetWellKnownTable());
+            this.WellKnownTables.Add(notificationsManager.WellKnownTable);
+            //this.WellKnownTables.Add(INotificationsManager.TABLE);
             //..altri ?
 
             this.dbManager = new DbManager(this.connection,this.WellKnownTables.ToArray());
             this.CreateDb(dbName);
 
             //per ogni manager con tabelle "note"
-            this.dbManager.CreateTable(INotificationsManager.TABLE);
+            this.dbManager.CreateTable(notificationsManager.WellKnownTable);
+            //this.dbManager.CreateTable(INotificationsManager.TABLE);
         }
 
         /// <summary>
@@ -53,7 +55,7 @@ namespace RethinkDbLib.src
         /// <param name="dbName"></param>
         private void CreateDb(string dbName)
         {
-            var conn = this.connection.GetConnection();
+            var conn = this.connection.Connection();
             var exists = R.DbList().Contains(db => db == dbName).Run(conn);
             if (!exists)
             {
@@ -62,6 +64,23 @@ namespace RethinkDbLib.src
             }
         }
 
+        public IDbManager DBManager
+        {
+            get => this.dbManager;
+        }
+
+        public INotificationsManager NotificationsManager
+        {
+            get => this.notificationsManager;
+        }
+
+        public void CloseConnection()
+        {
+            this.connection.CloseConnection();
+        }
+
+
+        /*
         public IDbManager GetDbManager()
         {
             return this.dbManager;
@@ -71,11 +90,10 @@ namespace RethinkDbLib.src
         {
             return this.notificationsManager;
         }
+        */
 
-        public void CloseConnection()
-        {
-            this.connection.CloseConnection();
-        }
+
+
 
     }
 }

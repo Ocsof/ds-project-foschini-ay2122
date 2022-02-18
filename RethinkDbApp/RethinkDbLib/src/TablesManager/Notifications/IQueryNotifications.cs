@@ -27,7 +27,7 @@ namespace RethinkDbLib.src.TablesManager.Notifications
         /// <typeparam name="T">Deve essere una classe che eredita dalla classe astratta "Notification"</typeparam>
         /// <param name="id">id della notifica da ricercare</param>
         /// <returns>La notifica</returns>
-        public T GetNotificationOrNull<T>(Guid id) where T : Notification;
+        public T NotificationOrNull<T>(Guid id) where T : Notification;
 
         /// <summary>
         /// Richiede al db tutte le notifiche avvenute in una certa data, è sufficente impostare giorno/mese/anno
@@ -35,7 +35,7 @@ namespace RethinkDbLib.src.TablesManager.Notifications
         /// <typeparam name="T">Deve essere una classe che eredita dalla classe astratta "Notification"</typeparam>
         /// <param name="date">data presa in considerazione, è sufficente impostargli giorno/mese/anno</param>
         /// <returns>Lista delle notifiche in quella data</returns>
-        public IList<T> GetNotifications<T>(DateTime date) where T : Notification;
+        public IList<T> NotificationsDate<T>(DateTime date) where T : Notification;
 
         //public IList<String> GetNotifications(DateTime date);
 
@@ -45,7 +45,7 @@ namespace RethinkDbLib.src.TablesManager.Notifications
         /// <typeparam name="T">Deve essere una classe che eredita dalla classe astratta "Notification"</typeparam>
         /// <param name="text">Testo preso in considerazione</param>
         /// <returns>Lista di notifiche con quel testo</returns>
-        public IList<T> GetNotificationsWithText<T>(String text) where T : Notification;
+        public IList<T> NotificationsWithText<T>(String text) where T : Notification;
 
         /// <summary>
         /// Richiede al db tutte le notifiche con un certo argomento
@@ -53,6 +53,6 @@ namespace RethinkDbLib.src.TablesManager.Notifications
         /// <typeparam name="T">Deve essere una classe che eredita dalla classe astratta "Notification"</typeparam>
         /// <param name="arg">Argomento richiesto</param>
         /// <returns>Lista di notifiche con quel arg</returns>
-        public IList<T> GetNotificationsWithArg<T>(String arg) where T : Notification;
+        public IList<T> NotificationsWithArg<T>(String arg) where T : Notification;
     }
 }

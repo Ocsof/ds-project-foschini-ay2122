@@ -14,20 +14,25 @@ namespace RethinkDbLib.src.TablesManager.Notifications
             this.queryToNotifications = new QueryNotifications(connection);
         }
 
-        public INotifier<T> GetNotifier<T>() where T : Notification
+        public INotifier<T> Notifier<T>() where T : Notification
         {
             INotifier<T> notifier = new Notifier<T>(this.connection);
             return notifier;
         }
 
+        public IQueryNotifications QueryService { get => this.queryToNotifications; }
+
+        /*
         public IQueryNotifications GetQueryService()
         {
             return this.queryToNotifications;
         }
+        */
 
-        public string GetWellKnownTable()
+        public string WellKnownTable
         {
-            return INotificationsManager.TABLE;
+            get => INotificationsManager.TABLE;
         }
+        
     }
 }

@@ -8,7 +8,7 @@ namespace RethinkDbLib.src.Exception
     [Serializable]
     public class NewGuidException : System.Exception
     {
-        private readonly static string message = "Il Guid creato è già presente";
+        private readonly static string message = "The Guid created is already on the db";
         public NewGuidException() : base(message)
         {
 

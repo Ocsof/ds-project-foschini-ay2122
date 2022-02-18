@@ -13,24 +13,24 @@ namespace RethinkDbLib.src.Connection
     {
         //private RethinkDB R = RethinkDB.R;
         private ConnectionPool conn;  //IConnection
-        private readonly IList<DbOptions> listNodi;
+        private readonly IList<DbOptions> listNodes;
         private readonly int timeout;
 
         //il timeout come paramtro opzionalmente configurabile
-        public ConnectionNodes(IList<DbOptions> listNodi, int timeout = 20) 
+        public ConnectionNodes(IList<DbOptions> listNodes, int timeout = 20) 
         {
-            this.listNodi = listNodi;
+            this.listNodes = listNodes;
             this.timeout = timeout;
         }
 
-        public virtual IConnection GetConnection()
+        public virtual IConnection Connection()
         {
             if (conn == null)
             {
                 var R = RethinkDB.R;
-                string[] nodi = new string[this.listNodi.Count];
+                string[] nodi = new string[this.listNodes.Count];
                 int position = 0;
-                foreach(DbOptions node in listNodi)
+                foreach(DbOptions node in listNodes)
                 {
                     nodi[position] = node.HostPort;
                     position++;
@@ -55,7 +55,7 @@ namespace RethinkDbLib.src.Connection
             {
                 //conn.Reconnect();
                 conn = null;
-                this.GetConnection();
+                this.Connection();
             }
             
             return conn;
@@ -71,14 +71,15 @@ namespace RethinkDbLib.src.Connection
             }
         }
 
-        public IList<DbOptions> GetNodi()
+        public IList<DbOptions> Nodes
         {
-            return this.listNodi;
+            get => this.listNodes;
         }
 
-        public int GetTimeout()
+        public int Timeout
         {
-            return this.timeout;
+            get => this.timeout;
+            
         }
     }
 }

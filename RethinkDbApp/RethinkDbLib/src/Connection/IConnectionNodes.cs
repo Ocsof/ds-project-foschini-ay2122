@@ -10,7 +10,7 @@ namespace RethinkDbLib.src.Connection
         /// Ritorna la connessione verso il server
         /// </summary>
         /// <returns>La connessione</returns>
-        public IConnection GetConnection();
+        public IConnection Connection();
 
         /// <summary>
         /// Chiusura connessione
@@ -21,12 +21,12 @@ namespace RethinkDbLib.src.Connection
         /// Ritorna i Nodi Del Cluster
         /// </summary>
         /// <returns>I nodi Rethink presenti sul server</returns>
-        public IList<DbOptions> GetNodi();
+        public IList<DbOptions> Nodes { get; }
 
         /// <summary>
         /// Timeout per la connessione
         /// </summary>
-        public int GetTimeout();
+        public int Timeout { get; }
 
     }
 }

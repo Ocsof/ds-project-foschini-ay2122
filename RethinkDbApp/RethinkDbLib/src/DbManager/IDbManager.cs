@@ -12,7 +12,7 @@ namespace RethinkDbLib.src.DBManager
         /// Restituisce le tabelle presenti sul db
         /// </summary>
         /// <returns>Tabelle presenti sul db</returns>
-        public string GetTablesList();
+        public string TablesList { get; }
 
         /// <summary>
         /// Crea la tabella sul db precedentemente specificato.
@@ -31,7 +31,7 @@ namespace RethinkDbLib.src.DBManager
         /// </summary>
         /// <param name="tableName">Nome tabella</param>
         /// <returns>Indici della tabella</returns>
-        public string GetIndexList(string tableName);
+        public string IndexList(string tableName);
 
         /// <summary>
         /// Crea Indice su un campo di una tabella di un db

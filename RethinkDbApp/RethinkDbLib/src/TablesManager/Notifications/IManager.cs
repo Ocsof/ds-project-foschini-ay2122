@@ -11,6 +11,9 @@ namespace RethinkDbLib.src.TablesManager.Notifications
         /// Restituisce la sua tabella di sistema
         /// </summary>
         /// <returns>Tabella di sistema</returns>
-        string GetWellKnownTable();
+        string WellKnownTable { get; }
+
+        //string GetWellKnownTable();
+
     }
 }

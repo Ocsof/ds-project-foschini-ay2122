@@ -23,20 +23,20 @@ namespace RethinkDbLib.src.TablesManager.Notifications
         public QueryNotifications(IConnectionNodes connection)
         {
             this.connection = connection;
-            this.dbName = connection.GetNodi().ElementAt(0).Database;
+            this.dbName = connection.Nodes.ElementAt(0).Database;
             this.tableName = INotificationsManager.TABLE;
         }
 
         public void DeleteNotification(Guid id)
         {
-            var conn = this.connection.GetConnection();
+            var conn = this.connection.Connection();
 
             R.Db(this.dbName).Table(this.tableName).Get(id).Delete().Run(conn);
         }
 
-        public T GetNotificationOrNull<T>(Guid id) where T : Notification
+        public T NotificationOrNull<T>(Guid id) where T : Notification
         {
-            var conn = this.connection.GetConnection();
+            var conn = this.connection.Connection();
             Cursor<T> notification;
             try
             {
@@ -52,9 +52,9 @@ namespace RethinkDbLib.src.TablesManager.Notifications
             }
         }
 
-        public IList<T> GetNotifications<T>(DateTime date) where T : Notification
+        public IList<T> NotificationsDate<T>(DateTime date) where T : Notification
         {
-            var conn = this.connection.GetConnection();
+            var conn = this.connection.Connection();
             Cursor<T> notifications;
 
             notifications = R.Db(this.dbName).Table(this.tableName)
@@ -69,9 +69,9 @@ namespace RethinkDbLib.src.TablesManager.Notifications
             */
         }
 
-        public IList<T> GetNotificationsWithArg<T>(string arg) where T : Notification
+        public IList<T> NotificationsWithArg<T>(string arg) where T : Notification
         {
-            var conn = this.connection.GetConnection();
+            var conn = this.connection.Connection();
             Cursor<T> notifications;
 
             notifications = R.Db(this.dbName).Table(this.tableName)
@@ -85,9 +85,9 @@ namespace RethinkDbLib.src.TablesManager.Notifications
             return notifications.ToList();
         }
 
-        public IList<T> GetNotificationsWithText<T>(string text) where T : Notification
+        public IList<T> NotificationsWithText<T>(string text) where T : Notification
         {
-            var conn = this.connection.GetConnection();
+            var conn = this.connection.Connection();
             Cursor<T> notifications;
 
             notifications = R.Db(this.dbName).Table(this.tableName)
@@ -104,7 +104,7 @@ namespace RethinkDbLib.src.TablesManager.Notifications
 
         public void NewNotification<T>(T notification) where T : Notification
         {
-            var conn = this.connection.GetConnection();
+            var conn = this.connection.Connection();
 
             Cursor<T> all = R.Db(this.dbName).Table(this.tableName)
                 .GetAll(notification.Id)//[new { index = nameof(Post.title) }]

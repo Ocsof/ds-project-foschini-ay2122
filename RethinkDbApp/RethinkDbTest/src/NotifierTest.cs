@@ -32,9 +32,9 @@ namespace RethinkDbTest.src
             this.hostPortsOneNodeWrong = new List<String>() { "192.168.1.57:29016" };
 
             this.utilityRethink = new UtilityRethink("test", hostPortsOneNode);
-            this.notifierExec = this.utilityRethink.GetNotificationsManager().GetNotifier<NotificationExec>();
-            this.notifierNewData = this.utilityRethink.GetNotificationsManager().GetNotifier<NotificationNewData>();
-            this.queryNotifications = utilityRethink.GetNotificationsManager().GetQueryService();
+            this.notifierExec = this.utilityRethink.NotificationsManager.Notifier<NotificationExec>();
+            this.notifierNewData = this.utilityRethink.NotificationsManager.Notifier<NotificationNewData>();
+            this.queryNotifications = utilityRethink.NotificationsManager.QueryService;
         }
 
 

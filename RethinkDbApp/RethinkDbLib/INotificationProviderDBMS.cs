@@ -9,6 +9,8 @@ namespace RethinkDbLib
         /// Metodo per gestire il db precedentemente specificato nel costruttore di Utility Rethink
         /// </summary>
         /// <returns>Oggetto che gestisce il database, permette di creare tabelle nuove, indici, riconfigurare il numero di shards e repliche</returns>
-        public IDbManager GetDbManager();
+        IDbManager DBManager { get; }
+
+        //public IDbManager GetDbManager();
     }
 }

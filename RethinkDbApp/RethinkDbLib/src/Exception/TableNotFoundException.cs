@@ -8,8 +8,8 @@ namespace RethinkDbLib.src.Exception
     [Serializable]
     public class TableNotFoundException : System.Exception
     {
-        private readonly static string message = "Tabella ";
-        private readonly static string message2 = " non trovata sul db";
+        private readonly static string message = "Table ";
+        private readonly static string message2 = " not found on db";
         public TableNotFoundException(string table) : base(message + table + message2)
         {
 

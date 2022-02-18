@@ -25,14 +25,14 @@ namespace RethinkDbLib.src.TablesManager.Notifications
         public Notifier(IConnectionNodes rethinkDbConnection)
         {
             this.rethinkDbConnection = rethinkDbConnection;
-            this.dbName = this.rethinkDbConnection.GetNodi().ElementAt(0).Database;
+            this.dbName = this.rethinkDbConnection.Nodes.ElementAt(0).Database;
             changesDict = new ConcurrentDictionary<Guid, Cursor<Change<T>>>();  //Rappresenta una raccolta thread-safe di coppie chiave/valore a cui è possibile accedere contemporaneamente da più thread.
             this.tableName = INotificationsManager.TABLE;
         }
 
         public NotificationSubscription<T> ListenWithOneOfTheArguments(params string[] argsList)
         {
-            var conn = this.rethinkDbConnection.GetConnection();
+            var conn = this.rethinkDbConnection.Connection();
 
             var changes = R.Db(dbName).Table(this.tableName)
              .Filter(notification =>

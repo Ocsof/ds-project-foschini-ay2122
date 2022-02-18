@@ -42,7 +42,7 @@ namespace RethinkDbTest.src
         [TestMethod]
         public void TestDeleteTableList()
         {
-            var dbManager = utilityRethink.GetDbManager();
+            var dbManager = utilityRethink.DBManager;
             Assert.ThrowsException<DeleteTableSystemException>(() => dbManager.DeleteTable("Notifications") );
         }
     }

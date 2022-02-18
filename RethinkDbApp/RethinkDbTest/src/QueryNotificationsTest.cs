@@ -32,7 +32,7 @@ namespace RethinkDbTest.src
 
             this.utilityRethink = new UtilityRethink("test", hostPortsOneNode);
 
-            this.queryNotifications = utilityRethink.GetNotificationsManager().GetQueryService();
+            this.queryNotifications = utilityRethink.NotificationsManager.QueryService;
 
             this.idExecution = Guid.NewGuid();
             Guid idExec = Guid.NewGuid();
@@ -75,26 +75,26 @@ namespace RethinkDbTest.src
             this.queryNotifications.NewNotification(notificationExecution);
 
             //la notifica con id "NewDate" sarebbe di tipo NewDate quindi la variabile restituita è null
-            notificationExecution = this.queryNotifications.GetNotificationOrNull<NotificationExec>(idNewData);
+            notificationExecution = this.queryNotifications.NotificationOrNull<NotificationExec>(idNewData);
             Assert.IsNull(notificationExecution);
 
             //non esiste notifica con questo id casuale per ora
-            notificationExecution = this.queryNotifications.GetNotificationOrNull<NotificationExec>(new Guid());
+            notificationExecution = this.queryNotifications.NotificationOrNull<NotificationExec>(new Guid());
             Assert.IsNull(notificationExecution);
 
             //qui è ok quindi entra nell'if
-            notificationNewData = this.queryNotifications.GetNotificationOrNull<NotificationNewData>(idNewData);
+            notificationNewData = this.queryNotifications.NotificationOrNull<NotificationNewData>(idNewData);
             if (notificationNewData != null)
             {
-                Console.WriteLine("Notifica con id: " + idNewData.ToString() + " : ");
+                Console.WriteLine("Notification with id: " + idNewData.ToString() + " : ");
                 Console.WriteLine(notificationNewData.ToString());
             }
 
             //qui tutto ok ed entra nell'if
-            notificationExecution = this.queryNotifications.GetNotificationOrNull<NotificationExec>(idExecution);
+            notificationExecution = this.queryNotifications.NotificationOrNull<NotificationExec>(idExecution);
             if (notificationExecution != null)
             {
-                Console.WriteLine("Notifica con id: " + idExecution.ToString() + " : ");
+                Console.WriteLine("Notification with id: " + idExecution.ToString() + " : ");
                 Console.WriteLine(notificationExecution.ToString());
             }
 
@@ -111,18 +111,18 @@ namespace RethinkDbTest.src
             this.queryNotifications.NewNotification(notificationExecution);
 
             //qui è ok quindi entra nell'if
-            notificationNewData = this.queryNotifications.GetNotificationOrNull<NotificationNewData>(idNewData);
+            notificationNewData = this.queryNotifications.NotificationOrNull<NotificationNewData>(idNewData);
             if (notificationNewData != null)
             {
-                Console.WriteLine("Notifica con id: " + idNewData.ToString() + " : ");
+                Console.WriteLine("Notification with id: " + idNewData.ToString() + " : ");
                 Console.WriteLine(notificationNewData.ToString());
             }
 
             //qui tutto ok ed entra nell'if
-            notificationExecution = this.queryNotifications.GetNotificationOrNull<NotificationExec>(idExecution);
+            notificationExecution = this.queryNotifications.NotificationOrNull<NotificationExec>(idExecution);
             if (notificationExecution != null)
             {
-                Console.WriteLine("Notifica con id: " + idExecution.ToString() + " : ");
+                Console.WriteLine("Notification with id: " + idExecution.ToString() + " : ");
                 Console.WriteLine(notificationExecution.ToString());
             }
 
@@ -130,11 +130,11 @@ namespace RethinkDbTest.src
             this.queryNotifications.DeleteNotification(idExecution);
 
             //dato che l'ho cancellata deve dare true
-            notificationNewData = this.queryNotifications.GetNotificationOrNull<NotificationNewData>(idNewData);
+            notificationNewData = this.queryNotifications.NotificationOrNull<NotificationNewData>(idNewData);
             Assert.IsNull(notificationNewData);
 
             //dato che l'ho cancellata deve dare true
-            notificationExecution = this.queryNotifications.GetNotificationOrNull<NotificationExec>(idExecution);
+            notificationExecution = this.queryNotifications.NotificationOrNull<NotificationExec>(idExecution);
             Assert.IsNull(notificationExecution);
         }
 
@@ -145,10 +145,10 @@ namespace RethinkDbTest.src
             this.queryNotifications.NewNotification(notificationNewData);
             this.queryNotifications.NewNotification(notificationExecution);
             DateTime newDataDate = notificationNewData.Date;
-            IList<NotificationNewData> listNotificationNewData = this.queryNotifications.GetNotifications<NotificationNewData>(newDataDate);
+            IList<NotificationNewData> listNotificationNewData = this.queryNotifications.NotificationsDate<NotificationNewData>(newDataDate);
             if (listNotificationNewData.Count != 0)
             {
-                Console.WriteLine("Notifiche di new data in data: " + newDataDate.ToString() + ": ");
+                Console.WriteLine("New data Notification in date: " + newDataDate.ToString() + ": ");
                 foreach (NotificationNewData not in listNotificationNewData)
                 {
                     Console.WriteLine(not.ToString());
@@ -157,7 +157,7 @@ namespace RethinkDbTest.src
             }
 
             newDataDate = new DateTime(1995, 1, 1);
-            IList<NotificationExec> listNotificationExecution = this.queryNotifications.GetNotifications<NotificationExec>(newDataDate);
+            IList<NotificationExec> listNotificationExecution = this.queryNotifications.NotificationsDate<NotificationExec>(newDataDate);
             Assert.IsTrue(listNotificationExecution.Count == 0); 
             this.queryNotifications.DeleteNotification(idNewData);
             this.queryNotifications.DeleteNotification(idExecution);
@@ -170,10 +170,10 @@ namespace RethinkDbTest.src
             this.queryNotifications.NewNotification(notificationNewData);
             this.queryNotifications.NewNotification(notificationExecution);
             string textNewData = notificationNewData.Text;
-            IList<NotificationNewData> listNotificationNewData = this.queryNotifications.GetNotificationsWithText<NotificationNewData>(textNewData);
+            IList<NotificationNewData> listNotificationNewData = this.queryNotifications.NotificationsWithText<NotificationNewData>(textNewData);
             if (listNotificationNewData.Count != 0)
             {
-                Console.WriteLine("Notifiche di new data con text: " + textNewData);
+                Console.WriteLine("New Data Notification with text: " + textNewData);
                 foreach (NotificationNewData not in listNotificationNewData)
                 {
                     Console.WriteLine(not.ToString());
@@ -182,7 +182,7 @@ namespace RethinkDbTest.src
             }
 
             string textExec = CreateRandomString();
-            IList<NotificationExec> listNotificationExecution = this.queryNotifications.GetNotificationsWithText<NotificationExec>(textExec);
+            IList<NotificationExec> listNotificationExecution = this.queryNotifications.NotificationsWithText<NotificationExec>(textExec);
             Assert.IsTrue(listNotificationExecution.Count == 0);
             this.queryNotifications.DeleteNotification(idNewData);
             this.queryNotifications.DeleteNotification(idExecution);
@@ -195,20 +195,20 @@ namespace RethinkDbTest.src
             this.queryNotifications.NewNotification(notificationExecution);
             string argNewData = notificationNewData.Arg;
             string argExec = notificationExecution.Arg;
-            IList<NotificationNewData> listNotificationNewData = this.queryNotifications.GetNotificationsWithArg<NotificationNewData>(argNewData);
+            IList<NotificationNewData> listNotificationNewData = this.queryNotifications.NotificationsWithArg<NotificationNewData>(argNewData);
             if (listNotificationNewData.Count != 0)
             {
-                Console.WriteLine("Notifica di new data con Arg: " + argNewData);
+                Console.WriteLine("New data notification with arg: " + argNewData);
                 foreach (NotificationNewData not in listNotificationNewData)
                 {
                     Console.WriteLine(not.ToString());
                     Console.WriteLine();
                 }
             }
-            IList<NotificationExec> listNotificationExecution = this.queryNotifications.GetNotificationsWithArg<NotificationExec>(argExec);
+            IList<NotificationExec> listNotificationExecution = this.queryNotifications.NotificationsWithArg<NotificationExec>(argExec);
             if (listNotificationExecution.Count != 0)
             {
-                Console.WriteLine("Notifica di exec con Arg: " + argExec);
+                Console.WriteLine("Execution Notification with Arg: " + argExec);
                 foreach (NotificationExec not in listNotificationExecution)
                 {
                     Console.WriteLine(not.ToString());
