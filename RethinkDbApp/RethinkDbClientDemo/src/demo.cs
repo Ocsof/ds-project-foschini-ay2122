@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
@@ -18,10 +20,38 @@ namespace RethinkDbClientDemo.src
         //static void Main(string[] args)
         static async Task Main(string[] args)
         {
-            //ATTENZIONE: Cambiare l'indirizzo IP con il proprio locale
-            IList<string> hostPortsNodiCluster = new List<String>() { "192.168.1.57:28016", "192.168.1.57:28017", "192.168.1.57:28018", "192.168.1.57:28019", "192.168.1.57:28020" };
-            IList<string> hostPortsTwoNodi = new List<String>() { "192.168.1.57:28016", "192.168.1.57:28017" };
-            IList<string> hostPortsOneNode = new List<String>() { "192.168.1.57:28016" };
+            IList<string> hostPortsNodiCluster = new List<String>();
+            IList<string> hostPortsTwoNodi = new List<String>();
+            IList<string> hostPortsOneNode = new List<String>();
+            string ipServer;
+            int port = 28016;
+            string hostPort;
+
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    ipServer = ip.ToString();
+                    for (int i = 0; i < 5; i++)
+                    {
+                        hostPort = ipServer + ":" + port;
+                        if (port == 28016)
+                        {
+                            hostPortsOneNode.Add(hostPort);
+                            hostPortsTwoNodi.Add(hostPort);
+                        }
+                        if(port == 28017)
+                        {
+                            hostPortsTwoNodi.Add(ipServer + ":" + port);
+                        }
+                        hostPortsNodiCluster.Add(ipServer + ":" + port);
+                        port++;
+                    }
+                }
+            }
+            
+
             INotificationProviderDBMS utilityRethink = new UtilityRethink("test", hostPortsNodiCluster);
 
             var dbManager = utilityRethink.DBManager;
