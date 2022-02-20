@@ -6,6 +6,8 @@ using RethinkDbLib.src.Exception;
 using RethinkDbLib.src.TablesManager.Notifications;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
@@ -23,15 +25,26 @@ namespace RethinkDbTest.src
         private INotifier<NotificationExec> notifierExec;
         private INotifier<NotificationNewData> notifierNewData;
         private IQueryNotifications queryNotifications;
+        private NotificationExec notificationExec;
+        private NotificationNewData notificationNewData;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            //ATTENZIONE: Cambiare l'indirizzo IP con il proprio locale
-            this.hostPortsOneNode = new List<String>() { "192.168.1.57:28016" };
-            this.hostPortsOneNodeWrong = new List<String>() { "192.168.1.57:29016" };
+            hostPortsOneNode = new List<String>();
+            hostPortsOneNodeWrong = new List<String>();
 
-            this.utilityRethink = new UtilityRethink("test", hostPortsOneNode);
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    hostPortsOneNode.Add(ip.ToString() + ":28016");
+                    hostPortsOneNodeWrong.Add(ip.ToString() + ":29016");
+                }
+            }
+
+            utilityRethink = new UtilityRethink("test", hostPortsOneNode);
             this.notifierExec = this.utilityRethink.NotificationsManager.Notifier<NotificationExec>();
             this.notifierNewData = this.utilityRethink.NotificationsManager.Notifier<NotificationNewData>();
             this.queryNotifications = utilityRethink.NotificationsManager.QueryService;
@@ -66,58 +79,24 @@ namespace RethinkDbTest.src
                     () => OnCompleted(ref onCompleted)
                 );
 
-            //Next simulate 3 inserts into Notification table.
-            Thread.Sleep(3000);
 
             Task.Run(() =>
             {
-                this.queryNotifications.NewNotification<NotificationExec>(new NotificationExec
+                this.notificationExec = new NotificationExec
                 {
                     Id = Guid.NewGuid(),
                     Date = DateTime.Now,
                     Text = CreateRandomString(),
                     Arg = "ciao",
                     IdExec = Guid.NewGuid()
-                });
+                };
+
+                this.queryNotifications.NewNotification<NotificationExec>(this.notificationExec);
             });
 
-            Console.WriteLine();
-            Thread.Sleep(10000);
-
-            Task.Run(() =>
-            {
-                this.queryNotifications.NewNotification<NotificationExec>(new NotificationExec
-                {
-                    Id = Guid.NewGuid(),
-                    Date = DateTime.Now,
-                    Text = CreateRandomString(),
-                    Arg = "ciuppa",
-                    IdExec = Guid.NewGuid()
-                });
-            });
-
-            Console.WriteLine();
-            Thread.Sleep(10000);
-
-            //qui non entra nella onNext perchè l'argomento "pappappero" non è nella lista 
-            Task.Run(() =>
-            {
-                this.queryNotifications.NewNotification<NotificationExec>(new NotificationExec
-                {
-                    Id = Guid.NewGuid(),
-                    Date = DateTime.Now,
-                    Text = CreateRandomString(),
-                    Arg = "pappappero",
-                    IdExec = Guid.NewGuid()
-                });
-            });
-
-            Console.WriteLine();
-            Thread.Sleep(10000);
 
             this.notifierExec.StopListening(subscription.Guid);
             //notificatorsExec.StopListening(pair);
-            Console.WriteLine();
 
             //notificatorsNewData.StopListening();
 
@@ -128,28 +107,19 @@ namespace RethinkDbTest.src
 
         private static void OnCompleted(ref int onCompleted)
         {
-            Console.WriteLine("Stop listening");
             onCompleted++;
         }
 
         private static void OnError(Exception obj, ref int onError)
         {
-            Console.WriteLine("On Error");
-            Console.WriteLine(obj.Message);
             onError++;
         }
 
-        private static void OnNext<T>(Change<T> obj, ref int onNext) where T : Notification
+        private void OnNext<T>(Change<T> obj, ref int onNext) where T : Notification
         {
-            Console.WriteLine("On Next");
-            var oldValue = obj.OldValue;
-
             onNext++;
-            Console.WriteLine("New Value: " + obj.NewValue.ToString());
-            if (oldValue != null)
-            { //nel caso di un update
-                Console.WriteLine("Old Value: " + oldValue.ToString());
-            }
+            Assert.AreEqual(this.notificationExec.ToString(), obj.NewValue.ToString());
+ 
         }
 
         private static String CreateRandomString()

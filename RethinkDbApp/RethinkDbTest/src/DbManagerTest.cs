@@ -4,6 +4,8 @@ using RethinkDbLib.src;
 using RethinkDbLib.src.Exception;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 
 namespace RethinkDbTest.src
 {
@@ -19,12 +21,20 @@ namespace RethinkDbTest.src
         [TestInitialize]
         public void TestInitialize()
         {
-            //ATTENZIONE: Cambiare l'indirizzo IP con il proprio locale
-            hostPortsOneNode = new List<String>() { "192.168.1.57:28016" };
-            hostPortsOneNodeWrong = new List<String>() { "192.168.1.57:29016" };
+            hostPortsOneNode = new List<String>();
+            hostPortsOneNodeWrong = new List<String>();
+
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    hostPortsOneNode.Add(ip.ToString() + ":28016");
+                    hostPortsOneNodeWrong.Add(ip.ToString() + ":29016");
+                }
+            }
 
             utilityRethink = new UtilityRethink("test", hostPortsOneNode);
-            //utilityRethinkWrong = new UtilityRethink("test", hostPortsOneNodeWrong);
         }
 
         [TestCleanup]
