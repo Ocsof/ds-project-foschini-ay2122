@@ -331,7 +331,7 @@ namespace RethinkDbClientDemo.src
             var onNext = 0;
 
 
-            NotificationSubscription<NotificationExec> pair = notificatorsExec.ListenWithOneOfTheArguments("ciao", "ciuppa");
+            NotificationSubscription<NotificationExec> pair = notificatorsExec.ListenWithOneOfTheArguments("A", "B");
 
             IObservable<Change<NotificationExec>> observervableExecForArgs = pair.Observable;
             observervableExecForArgs.SubscribeOn(NewThreadScheduler.Default)
@@ -351,7 +351,7 @@ namespace RethinkDbClientDemo.src
                     Id = Guid.NewGuid(),
                     Date = DateTime.Now,
                     Text = CreateRandomString(),
-                    Arg = "ciao",
+                    Arg = "A",
                     IdExec = Guid.NewGuid()
                 });
             });
@@ -366,7 +366,7 @@ namespace RethinkDbClientDemo.src
                     Id = Guid.NewGuid(),
                     Date = DateTime.Now,
                     Text = CreateRandomString(),
-                    Arg = "ciuppa",
+                    Arg = "B",
                     IdExec = Guid.NewGuid()
                 });
             });
