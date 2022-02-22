@@ -27,6 +27,7 @@ Thumbs.db
 *.app
 *.exe
 
+*.pdf
 
 RethinkDbApp/.vs/RethinkDbApp/xs/project-cache/RethinkDbLib-Debug.json
 RethinkDbApp/.vs/RethinkDbApp/xs/project-cache/RethinkDbTest-Debug.json
