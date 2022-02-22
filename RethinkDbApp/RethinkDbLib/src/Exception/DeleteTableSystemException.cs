@@ -8,7 +8,7 @@ namespace RethinkDbLib.src.Exception
     [Serializable]
     public class DeleteTableSystemException : System.Exception
     {
-        private readonly static string message = "Impossibile eliminare la tabella di sistema ";
+        private readonly static string message = "Could not delete system table ";
         public DeleteTableSystemException(string table) : base(message + table)
         {
 

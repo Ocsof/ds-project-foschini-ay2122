@@ -8,7 +8,7 @@ namespace RethinkDbLib.src.Exception
     [Serializable]
     public class ConnectionFailureException : System.Exception
     {
-        private readonly static string message = "Connessione fallita, server non trovato";
+        private readonly static string message = "Connection failed, server not found";
         public ConnectionFailureException() : base(message)
         {
 
