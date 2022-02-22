@@ -57,16 +57,7 @@ namespace RethinkDbClientDemo.src
             var dbManager = utilityRethink.DBManager;
             var queryNotifications = utilityRethink.NotificationsManager.QueryService;
             
-            /********** Test Connettività **********/
 
-            Console.WriteLine("************ Test Connection *************");
-            Console.WriteLine();
-
-            HttpClient client = new HttpClient();
-            var resp = await client.GetAsync("http://192.168.1.57:8081");
-            Console.WriteLine(resp.StatusCode);
-
-            Console.WriteLine();
 
             /************************************************************************************************************************************
             *********************************************Test DbManager   ********************************************************************
