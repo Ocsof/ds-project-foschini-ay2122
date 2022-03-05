@@ -123,7 +123,7 @@ namespace RethinkDbTest.src
 
 
         [TestMethod]
-        public void TestGetNotificationByData()
+        public void TestGetNotificationByDate()
         {
             this.queryNotifications.NewNotification(notificationNewData);
             this.queryNotifications.NewNotification(notificationExecution);

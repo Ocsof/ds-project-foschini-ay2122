@@ -64,7 +64,7 @@ namespace RethinkDbTest.src
         }
 
         [TestMethod]
-        public void TestNotifier()
+        public void TestClientCanBeNotified()
         {
             var onCompleted = 0;
             var onError = 0;
